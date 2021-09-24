@@ -1,16 +1,33 @@
 import PropTypes from 'prop-types';
+import styles from 'components/Statistics/Statistics.module.css';
+
+const randomInterval = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+const randomColor = () => {
+  let color = `rgb(${randomInterval(0, 255)},${randomInterval(
+    0,
+    255,
+  )},${randomInterval(0, 255)})`;
+  return color;
+};
 
 const Statistics = ({ title, stats }) => {
   return (
-    <section className="statistics">
-      {title && <h2 className="title">{title}</h2>}
+    <section className={styles.statistics}>
+      {title && <h2 className={styles.title}>{title}</h2>}
 
-      <ul className="stat-list">
+      <ul className={styles.statList}>
         {stats.map(({ id, label, percentage }) => {
           return (
-            <li className="item" key={id}>
-              <span className="label">{label}</span>
-              <span className="percentage">{percentage}%</span>
+            <li
+              className={styles.item}
+              style={{ backgroundColor: randomColor() }}
+              key={id}
+            >
+              <span className={styles.label}>{label}</span>
+              <span className={styles.percentage}>{percentage}%</span>
             </li>
           );
         })}
